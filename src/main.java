@@ -98,50 +98,6 @@ public class main {
         return dp[len - 1][0];
     }
 
-    //746. 使用最小花费爬楼梯
-    public static int minCostClimbingStairs(int[] cost) {
-        int len = cost.length;
-        if (len <= 1) {
-            return cost[0];
-        }
-        for (int i = 2; i < len; i++) {
-            cost[i] = Math.min(cost[i - 1] + cost[i], cost[i - 2] + cost[i]);
-        }
-        return Math.min(cost[len - 1], cost[len - 2]);
-    }
-
-    //103. 二叉树的锯齿形层序遍历
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) {
-            return res;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        int level = 0;
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            List<Integer> list = new ArrayList<>();
-            while (size --> 0) {
-                TreeNode node = queue.poll();
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
-                if (level % 2 == 0) {
-                    list.add(node.val);
-                } else {
-                    list.add(0,node.val);
-                }
-            }
-            level += 1;
-            res.add(list);
-        }
-        return res;
-    }
-
     static List<String> res257 = new ArrayList<>();
     //257. 二叉树的所有路径
     public static List<String> binaryTreePaths(TreeNode root) {
@@ -179,50 +135,6 @@ public class main {
             if (cnts[str.charAt(i) - 'a'] == 1)
                 return i;
         return -1;
-    }
-
-    //135. 分发糖果 总体思路: 每个孩子的左右边都要考虑;
-    public static int candy(int[] ratings) {
-        int res = 0;
-        int[] candies = new int[ratings.length]; //记录每位学生的糖果数
-        candies[0] = 1;
-        //先正序遍历，如果后一位比前一位高分，就给比前一位多1的糖果，否则给1
-        for (int i = 1; i < ratings.length; i++) {
-            if (ratings[i] > ratings[i-1]) {
-                candies[i] = candies[i-1] + 1;
-            } else {
-                candies[i] = 1;
-            }
-        }
-        //在倒叙遍历，如果前一位比后一位高分并且得到的糖果小于或等于后一位，就给前一位孩子比后一位孩子多一个糖果
-        for (int i = ratings.length - 2; i >= 0; i--) {
-            if (ratings[i] > ratings[i+1] && candies[i] <= candies[i+1]) {
-                candies[i] = candies[i+1] + 1;
-            }
-        }
-        for (int candy : candies) {
-            res += candy;
-        }
-        return res;
-    }
-
-    //455. 分发饼干
-    //贪心的思想是，用尽量小的饼干去满足小需求的孩子，所以需要进行排序先
-    public static int findContentChildren(int[] g, int[] s) {
-        if (g == null || s == null) {
-            return 0;
-        }
-        Arrays.sort(g);
-        Arrays.sort(s);
-        int child = 0;
-        int cookie = 0;
-        while (child < g.length && cookie < s.length) {
-            if (g[child] <= s[cookie]) { //当用当前饼干可以满足当前孩子的需求，可以满足的孩子数量+1
-                child++;
-            }
-            cookie++; // 饼干只可以用一次，因为饼干如果小的话，就是无法满足被抛弃，满足的话就是被用了
-        }
-        return child;
     }
 
     //559. N 叉树的最大深度
@@ -306,32 +218,6 @@ public class main {
             }
         }
         return sum;
-    }
-
-    //102. 二叉树的层序遍历
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) {
-            return res;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            List<Integer> list = new ArrayList<>();
-            while (size --> 0) {
-                TreeNode node = queue.poll();
-                list.add(node.val);
-                if (node.left != null) {
-                    queue.add(node.left);
-                }
-                if (node.right != null) {
-                    queue.add(node.right);
-                }
-            }
-            res.add(list);
-        }
-        return res;
     }
 
     //107. 二叉树的层序遍历 II

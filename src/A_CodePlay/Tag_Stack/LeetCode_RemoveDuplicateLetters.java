@@ -55,7 +55,6 @@ public class LeetCode_RemoveDuplicateLetters {
             }
             while (!stack.isEmpty() && stack.peek() > chars[i] && lastIndex[stack.peek() - 'a'] > i) {
                 visited[stack.pop() - 'a'] = false;
-
             }
             stack.push(chars[i]);
             visited[chars[i] - 'a'] = true;

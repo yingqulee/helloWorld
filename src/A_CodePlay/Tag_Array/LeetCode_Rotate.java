@@ -40,6 +40,7 @@ package A_CodePlay.Tag_Array;
  * ]
  */
 public class LeetCode_Rotate {
+
     public static void rotate(int[][] matrix) {
         //这个为啥不行
         /*int n = matrix.length;
@@ -83,6 +84,26 @@ public class LeetCode_Rotate {
         }
     }
 
+    //方法三：用翻转代替旋转
+    public static void rotateI(int[][] matrix) {
+        int n = matrix.length;
+        // 水平翻转
+        for (int i = 0; i < n / 2; ++i) {
+            for (int j = 0; j < n; ++j) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n - i - 1][j];
+                matrix[n - i - 1][j] = temp;
+            }
+        }
+        // 主对角线翻转
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
     public static void main(String[] args) {
 
         /*Scanner in = new Scanner(System.in);

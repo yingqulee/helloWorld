@@ -1,4 +1,4 @@
-package A_CodePlay.Tag_Array;
+package A_CodePlay.Tag_Greedy;
 
 /**
  * 605. 种花问题 简单
