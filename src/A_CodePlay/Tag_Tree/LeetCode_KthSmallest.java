@@ -1,5 +1,7 @@
 package A_CodePlay.Tag_Tree;
 
+import java.util.LinkedList;
+
 /**
  * 230. 二叉搜索树中第K小的元素 中等
  *
@@ -45,20 +47,41 @@ public class LeetCode_KthSmallest {
         find(node.right);
     }
 
-    public int kthSmallest(TreeNode root, int k) {
+    public int kthSmallestI(TreeNode root, int k) {
         count = k;
         find(root);
         return ans;
     }
 
+    /** 如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化 kthSmallest 函数？
+     *
+     * 在栈的帮助下，可以将方法一的递归转换为迭代，这样可以加快速度，因为这样可以不用遍历整个树，可以在找到答案后停止。
+     */
+    public int kthSmallestII(TreeNode root, int k) {
+        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+        while (true) {
+            if (root != null) {
+                stack.add(root);
+                root = root.left;
+            } else {
+                root = stack.removeLast();
+                if (--k == 0) {
+                    return root.val;
+                }
+                root = root.right;
+            }
+        }
+    }
     public static void main(String[] args) {
-        TreeNode treeNode1 = new TreeNode(10);
-        TreeNode treeNode2 = new TreeNode(15);
-        TreeNode treeNode3 = new TreeNode(20);
-        treeNode2.left = treeNode1;
-        treeNode2.right = treeNode3;
+        TreeNode treeNode1 = new TreeNode(3);
+        TreeNode treeNode2 = new TreeNode(1);
+        TreeNode treeNode3 = new TreeNode(4);
+        TreeNode treeNode4 = new TreeNode(2);
+        treeNode1.left = treeNode2;
+        treeNode1.right = treeNode3;
+        treeNode2.right = treeNode4;
         LeetCode_KthSmallest test = new LeetCode_KthSmallest();
-        System.out.println(test.kthSmallest(treeNode1,1));
+        System.out.println(test.kthSmallestII(treeNode1,1));
 
     }
 }

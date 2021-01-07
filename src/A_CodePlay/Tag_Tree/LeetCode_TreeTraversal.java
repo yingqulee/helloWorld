@@ -123,7 +123,7 @@ public class LeetCode_TreeTraversal {
     public static List<Character> postorderTraversalII(TreeNode root) {
         res = new ArrayList<>();
         stack = new LinkedList<>();
-        TreeNode p = null; //用来记录上一节点
+        TreeNode pre = null; //用来记录上一节点
         while (!stack.isEmpty() || root != null) {
             while (root != null) {
                 stack.push(root);
@@ -133,10 +133,10 @@ public class LeetCode_TreeTraversal {
 //            后序遍历的过程中在遍历完左子树跟右子树cur都会回到根结点。所以当前不管是从左子树还是右子树回到根结点都不应该再操作了，应该退回上层。
 //            如果是从右边再返回根结点，应该回到上层。
             //主要就是判断出来的是不是右子树，是的话就可以把根节点=加入到list了
-            if (root.right == null || root.right == p) {
+            if (root.right == null || root.right == pre) {
                 res.add(root.val);
                 stack.pop();
-                p = root;
+                pre = root;
                 root = null;
             } else {
                 root = root.right;

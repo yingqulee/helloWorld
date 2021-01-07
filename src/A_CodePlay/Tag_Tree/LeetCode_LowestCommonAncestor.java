@@ -20,12 +20,13 @@ package A_CodePlay.Tag_Tree;
  */
 public class LeetCode_LowestCommonAncestor {
 
-    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root == null || root == p || root ==q)
+    public static TreeNode lowestCommonAncestorI(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || root == p || root == q) {
             return root;
+        }
 
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        TreeNode left = lowestCommonAncestorI(root.left, p, q);
+        TreeNode right = lowestCommonAncestorI(root.right, p, q);
         if(left == null) {
             return right;
         } else if (right == null) {
@@ -36,12 +37,12 @@ public class LeetCode_LowestCommonAncestor {
 
     //思路:利用二叉搜索树的特点，如果p、q的值都小于root，说明p q 肯定在root的左子树中；
     //如果p q都大于root，说明肯定在root的右子树中，如果一个在左一个在右 则说明此时的root记为对应的最近公共祖先
-    public static TreeNode lowestCommonAncestor01(TreeNode root, TreeNode p, TreeNode q) {
+    public static TreeNode lowestCommonAncestorII(TreeNode root, TreeNode p, TreeNode q) {
         if (p.val < root.val && q.val < root.val) {
-            return lowestCommonAncestor(root.left, p, q);
+            return lowestCommonAncestorII(root.left, p, q);
         }
         if (p.val > root.val && q.val > root.val) {
-            return lowestCommonAncestor(root.right, p, q);
+            return lowestCommonAncestorII(root.right, p, q);
         }
         return root;
     }
@@ -70,6 +71,6 @@ public class LeetCode_LowestCommonAncestor {
         t5.right = t9;
 
         TreeNode root = t1;
-        System.out.println(lowestCommonAncestor01(root,t2,t3).val);
+        System.out.println(lowestCommonAncestorI(root,t2,t3).val);
     }
 }
