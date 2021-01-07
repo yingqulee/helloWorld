@@ -22,6 +22,7 @@ public class NowCoder_SubThree {
 
         for (int i = l; i <= r; i++) {
             if (i % 3 != 1){
+                System.out.println(i);
                 result++;
             }
         }

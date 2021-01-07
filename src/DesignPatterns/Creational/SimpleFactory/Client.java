@@ -22,7 +22,7 @@ public class Client {
          * 以下的 SimpleFactory 是简单工厂实现，它被所有需要进行实例化的客户类调用
          */
         SimpleFactory simpleFactory = new SimpleFactory();
-        Product product = simpleFactory.createProduct(5);
+        Product product = simpleFactory.createProduct(1);
         product.method();
     }
 }
