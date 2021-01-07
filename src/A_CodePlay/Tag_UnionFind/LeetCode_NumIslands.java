@@ -72,7 +72,6 @@ public class LeetCode_NumIslands {
                 --count;
             }
         }
-
         public int getCount() {
             return count;
         }
