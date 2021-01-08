@@ -39,7 +39,7 @@ package A_CodePlay.Tag_Array;
  *   [16, 7,10,11]
  * ]
  */
-public class LeetCode_Rotate {
+public class LeetCode_RotateMatrix {
 
     public static void rotate(int[][] matrix) {
         //这个为啥不行
