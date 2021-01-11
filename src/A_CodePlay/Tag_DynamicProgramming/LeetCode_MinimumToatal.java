@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class LeetCode_MinimumToatal {
 
-    public static int minimumTotal(List<List<Integer>> triangle) {
+    public static int minimumTotalI(List<List<Integer>> triangle) {
         if (triangle == null || triangle.size() == 0) {
             return 0;
         }
@@ -30,35 +30,34 @@ public class LeetCode_MinimumToatal {
         int[] min = new int[triangle.size() + 1];
         for (int i = triangle.size() - 1; i >= 0; i--) {
             for (int j = 0; j < triangle.get(i).size(); j++) {
-                //这里的min[j] 使用的时候默认是上一层的，赋值之后变成当前层
-                min[j] = triangle.get(i).get(j) + Math.min(min[j], min[j + 1]);
-//                System.out.println(min[j]);
+                min[j] = triangle.get(i).get(j) + Math.min(min[j], min[j + 1]);//这里的min[j] 使用的时候默认是上一层的，赋值之后变成当前层
             }
         }
         return min[0];
     }
 
+    public static int minimumTotalII(List<List<Integer>> triangle) {
+        if (triangle == null || triangle.size() == 0) {
+            return 0;
+        }
+        int n = triangle.size();
+        int[][] dp = new int[n + 1][n + 1]; // 加1可以不用初始化最后一层
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle.get(i).get(j);
+            }
+        }
+        return dp[0][0];
+    }
+
     public static void main(String[] args) {
-//        List<Integer> zero = new ArrayList<>();
-//        Collections.addAll(zero,2);
-//
-//        List<Integer> one = new ArrayList<>();
-//        Collections.addAll(one,3,4);
-//
-//        List<Integer> two = new ArrayList<>();
-//        Collections.addAll(two,6,5,7);
-//
-//        List<Integer> three = new ArrayList<>();
-//        Collections.addAll(three,4,1,8,3);
-//
-//        Collections.addAll(triangle,zero,one,two,three);
         List<List<Integer>> triangle = Arrays.asList(
                 Arrays.asList(2),
                 Arrays.asList(3, 4),
                 Arrays.asList(6, 5, 7),
                 Arrays.asList(4, 1, 8, 3)
         );
-        System.out.println(minimumTotal(triangle));
+        System.out.println(minimumTotalII(triangle));
 
     }
 }

@@ -58,7 +58,7 @@ public class LeetCode_LengthOfLongestSubstring {
     public static int lengthOfLongestSubstring02(String s) {
         Map<Character,Integer> map = new HashMap<>();
         int res = 0;
-        for (int i = 0, j = 0; j < s.length(); j++){
+        for (int i = 0, j = 0; j < s.length(); j++) {
             if (map.containsKey(s.charAt(j))) {
                 i = Math.max(i,map.get(s.charAt(j)));
             }
