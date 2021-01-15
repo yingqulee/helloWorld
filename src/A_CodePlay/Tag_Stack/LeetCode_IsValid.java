@@ -1,8 +1,6 @@
 package A_CodePlay.Tag_Stack;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 20. 有效的括号 简单
@@ -45,32 +43,25 @@ public class LeetCode_IsValid {
      */
 
     public static boolean isValid(String s) {
-
-            Map<Character, Character> map = new HashMap<>();
-            map.put(')', '(');
-            map.put(']', '[');
-            map.put('}', '{');
-            char[] ch = s.toCharArray();
-            if (ch.length == 0) {
-                return true;
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put(']', '[');
+        map.put('}', '{');
+        char[] chars = s.toCharArray();
+        if (chars.length == 0) {
+            return true;
+        }
+        Deque<Character> stack = new LinkedList<>();
+        for (char c : chars) {
+            if (c == '{' || c == '(' || c == '[') {
+                stack.push(c);
+            } else if (stack.peek() == map.get(c)) {
+                stack.pop();
+            } else {
+                return false;
             }
-
-            Stack<Character> stack = new Stack<>();
-            for (char c : ch) {
-                if (c == '(' || c == '[' || c == '{') {
-                    stack.push(c);
-                } else {
-                    if (stack.isEmpty()) {
-                        return false;
-                    }
-                    if (stack.peek() == map.get(c)) {//元素相等则弹出
-                        stack.pop();
-                    } else {
-                        return false;
-                    }
-                }
-            }
-            return stack.isEmpty();
+        }
+        return stack.isEmpty();
     }
 
     public static void main(String[] args) {
