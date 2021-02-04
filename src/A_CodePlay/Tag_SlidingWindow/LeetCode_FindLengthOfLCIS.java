@@ -1,4 +1,4 @@
-package A_CodePlay.Tag_Array;
+package A_CodePlay.Tag_SlidingWindow;
 
 /**
  * 674. 最长连续递增序列 简单
