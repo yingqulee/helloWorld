@@ -1,6 +1,4 @@
-package A_CodePlay.Tag_Array;
-
-import java.util.Arrays;
+package A_CodePlay.Tag_SlidingWindow;
 
 /**
  *  643. 子数组最大平均数 I 简单
