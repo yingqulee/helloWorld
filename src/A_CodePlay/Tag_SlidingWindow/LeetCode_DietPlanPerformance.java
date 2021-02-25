@@ -1,6 +1,7 @@
-package A_LeetCodeContest;
+package A_CodePlay.Tag_SlidingWindow;
 
-/**5174. 健身计划评估
+/**
+ * 1176. 健身计划评估
  * 你的好友是一位健身爱好者。前段日子，他给自己制定了一份健身计划。现在想请你帮他评估一下这份计划是否合理。
  *
  * 他会有一份计划消耗的卡路里表，其中 calories[i] 给出了你的这位好友在第 i 天需要消耗的卡路里总量。
@@ -30,7 +31,7 @@ package A_LeetCodeContest;
  * 输出：0
  * 解释：calories[0] + calories[1] > upper, calories[2] + calories[3] < lower, 总分 = 0.
  */
-public class Contest_DietPlanPerformance {
+public class LeetCode_DietPlanPerformance {
 
     public static int dietPlanPerformance(int[] ca, int k, int lower, int upper) {
         int sum = 0;
@@ -45,11 +46,9 @@ public class Contest_DietPlanPerformance {
             sum -= ca[i-k];
             if (sum < lower) {
                 res--;
-                System.out.println("res--");
             }
             if (sum > upper) {
                 res++;
-                System.out.println("res++");
             }
         }
         return res;
