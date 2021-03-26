@@ -17,8 +17,8 @@ public class LeetCode_DeleteDuplicates {
     public static ListNode deleteDuplicates(ListNode head) {
         ListNode current = head;
 
-        while(current != null && current.next != null){
-            if (current.val == current.next.val){
+        while(current != null && current.next != null) {
+            if (current.val == current.next.val) {
                 ListNode node = current.next;
                 current.next = node.next;
                 node.next = null;//清除野指针
