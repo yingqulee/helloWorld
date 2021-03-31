@@ -39,20 +39,18 @@ public class LeetCode_SubsetsWithDup {
         return res;
     }
 
-    private static void backtrack(int[] nums, int start, List<Integer> tmp) {
+    private static void backtrack(int[] nums, int start, List<Integer> list) {
         if (start == nums.length + 1) {
             return;
         }
-        res.add(new ArrayList<>(tmp));
-        int visited = Integer.MIN_VALUE;
-        int len = nums.length;
-        for (int i = start; i < len; i++) {
-            if (nums[i] != visited) {
-                tmp.add(nums[i]);
-                backtrack(nums, i+1, tmp);
-                tmp.remove(tmp.size() - 1);
-                visited = nums[i];
+        res.add(new ArrayList<>(list));
+        for (int i = start; i < nums.length; i++) {
+            if (i != start && nums[i] == nums[i-1]) {//去重
+                continue;
             }
+            list.add(nums[i]);
+            backtrack(nums, i + 1, list);
+            list.remove(list.size() - 1);
         }
     }
 

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class main {
+public class Solution {
 
     class TreeNode {
         int val;
@@ -168,10 +168,39 @@ public class main {
         return helper98(root.right, root.val, max) && helper98(root.left, min, root.val) ;
     }
 
+    //90. 子集 II
+    List<List<Integer>> list90 = new ArrayList<>();
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        if (nums == null) {
+            return list90;
+        }
+        Arrays.sort(nums);
+        backtrack(nums, 0, new ArrayList<>());
+        return list90;
+    }
+
+    public void backtrack(int[] nums, int start, List<Integer> list) {
+        if (start == nums.length + 1) {
+            return;
+        }
+        list90.add(new ArrayList<>(list));
+        int visited = Integer.MIN_VALUE;
+        for (int i = start; i < nums.length; i++) {
+            if (visited == nums[i]) {
+                continue;
+            }
+            list.add(nums[i]);
+            backtrack(nums, i + 1, list);
+            list.remove(list.size() - 1);
+            visited = nums[i];
+        }
+    }
 
     public static void main(String[] args) {
-        int[] array = {1, 0, 0, 0, 1};
+        int[] array = {4, 4, 4, 1, 4};
         String str = "loveleetcode";
-        System.out.println((array));
+        Solution s = new Solution();
+        System.out.println(s.subsetsWithDup(array));
     }
 }
