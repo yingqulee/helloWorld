@@ -16,7 +16,7 @@ import java.util.Arrays;
  */
 public class base_SelectionSort {
 
-    private static void sort(int arr[]){
+    private static void sort(int arr[]) {
         //双层循环，时间复杂度和冒泡一模一样，都是O(n2)。
         for (int i = 0; i < arr.length; i++) {
             int min = i;//最小元素的下标
@@ -25,7 +25,7 @@ public class base_SelectionSort {
                     min = j;//找最小值
                 }
             }
-            if (min!=i){
+            if (min!=i) {
                 int temp = arr[i];
                 arr[i] = arr[min];
                 arr[min] = temp;

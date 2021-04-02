@@ -22,7 +22,6 @@ public class base_HeapSort {
             //将堆顶元素下沉 目的是将最大的元素浮到堆顶来
             sink(arr,0,i);
         }
-        System.out.println(Arrays.toString(arr));
     }
     private static void buildHeap(int[] arr, int length) {
         for (int i = length / 2; i >= 0; i--) {
@@ -64,7 +63,7 @@ public class base_HeapSort {
 
     public static void main(String[] args) {
         int[] heap = {4, 23, 6, 78, 1, 54, 231, 9, 12};
-        sort(heap);//[1, 4, 6, 9, 12, 23, 54, 78, 231]
+        sort(heap);
+        System.out.println(Arrays.toString(heap)); // [1, 4, 6, 9, 12, 23, 54, 78, 231]
     }
-
 }

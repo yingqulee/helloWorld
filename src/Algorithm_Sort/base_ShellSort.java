@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 public class base_ShellSort {
 
-    private static void sort(int[] arr){
+    private static void sort(int[] arr) {
         int length = arr.length;
         //区间
         int gap = 1;

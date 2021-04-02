@@ -33,7 +33,7 @@ public class base_InsertionSort implements SortAlgorithm {
         return array;
     }
 
-    /*private static void sort(int[] arr){
+    /*private static void sort(int[] arr) {
         int n = arr.length;
         for (int i = 1; i < n; ++i) {
             int value = arr[i];

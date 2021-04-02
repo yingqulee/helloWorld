@@ -1,6 +1,7 @@
 package Algorithm_Sort;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 /*
     快速排序（QuickSort）是对冒泡排序的一种改进,
@@ -27,31 +28,30 @@ import java.util.Arrays;
  */
 public class base_QuickSort {
 
-    public static void sort(int[] arr) {
-        sort(arr,0, arr.length - 1);
-
-        System.out.println(Arrays.toString(arr));
+    public int[] sort(int[] arr) {
+        sort_noRecur(arr,0, arr.length - 1);
+        return arr;
     }
 
-    private static void sort(int[] arr, int startIndex, int endIndex) {
+    private void sort_recur(int[] arr, int startIndex, int endIndex) {
         if (endIndex <= startIndex) {
             return;
         }
         //切分
         int pivotIndex = partitionV1(arr, startIndex, endIndex);
-        sort(arr, startIndex, pivotIndex-1);
-        sort(arr, pivotIndex+1, endIndex);
+        sort_recur(arr, startIndex, pivotIndex-1);
+        sort_recur(arr, pivotIndex+1, endIndex);
     }
 
     //单边扫描
-    private static int partitionV1(int[] arr, int startIndex, int endIndex) {
+    private int partitionV1(int[] arr, int startIndex, int endIndex) {
         int pivot = arr[startIndex];//取基准值
         int mark = startIndex;//Mark初始化为起始下标
 
-        for(int i=startIndex+1; i<=endIndex; i++){
-            if(arr[i]<pivot){
+        for (int i=startIndex+1; i<=endIndex; i++) {
+            if (arr[i] < pivot) {
                 //小于基准值 则mark+1，并交换位置。
-                mark ++;
+                mark++;
                 int p = arr[mark];
                 arr[mark] = arr[i];
                 arr[i] = p;
@@ -64,7 +64,7 @@ public class base_QuickSort {
     }
 
     //双边扫描
-    private static int partitionV2(int[] arr,int startIndex,int endIndex) {
+    private int partitionV2(int[] arr,int startIndex,int endIndex) {
         int left = startIndex;
         int right = endIndex;
         int pivot = arr[startIndex];//取第一个元素为基准值
@@ -99,8 +99,36 @@ public class base_QuickSort {
         return right;
     }
 
+    //快排 非递归
+    private void sort_noRecur(int[] arr, int startIndex, int endIndex) {
+        if (arr == null || startIndex < 0 || endIndex <= 0 || startIndex > endIndex) {
+            return;
+        }
+        LinkedList<Integer> stack = new LinkedList<>();
+        int i, j;
+        // (注意保存顺序) 先将初始状态的左右指针压栈
+        stack.push(endIndex);
+        stack.push(startIndex);
+        while (!stack.isEmpty()) {
+            i = stack.pop(); //先弹出左指针
+            j = stack.pop(); //再弹出右指针
+            if (i < j) {
+                int k = partitionV1(arr, i, j);
+                if (k > i) {
+                    stack.push(k - 1); //保存中间变量
+                    stack.push(i); // 保存中间变量
+                }
+                if (j > k) {
+                    stack.push(j);
+                    stack.push(k + 1);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int a[] = {8,9,7,1,6,5,3,4,2,12,56,123};
-        sort(a);
+        base_QuickSort quickSort = new base_QuickSort();
+        System.out.println(Arrays.toString(quickSort.sort(a)));
     }
 }
