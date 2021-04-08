@@ -52,7 +52,7 @@ public class LeetCode_153_FindMin {
             // 这里有个编程技巧
             // 因为l < r 所以最后一轮肯定是(r, r+1)
             // 那么 mid 肯定是取值l 当判断条件是mid与l比时 会出现与自身比 造成出现等于情况 不好判断
-            // 所以判断条件时mid 与 r比 这样肯定是不同的两个数比
+            // 所以判断条件时mid 与 r比 这样肯定是不同的两个数比 
 
             // mid大于左边边界或者小于左边边界，最小值都有可能落在这个区间，所以区分不了 一定要 nums[mid] <= nums[right]
             if (nums[mid] <= nums[right]) {
