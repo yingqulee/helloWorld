@@ -41,6 +41,7 @@ public class LeetCode_153_FindMin {
         return nums[left];
     }
 
+    //前面一堆 0 ，后面一堆 1 ，然后寻找第一个１的二分问题
     public static int findMinI(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
@@ -48,13 +49,19 @@ public class LeetCode_153_FindMin {
         int left = 0, right = nums.length - 1;
         while (left < right) {
             int mid = left + (right - left) / 2;
+            // 这里有个编程技巧
+            // 因为l < r 所以最后一轮肯定是(r, r+1)
+            // 那么 mid 肯定是取值l 当判断条件是mid与l比时 会出现与自身比 造成出现等于情况 不好判断
+            // 所以判断条件时mid 与 r比 这样肯定是不同的两个数比
+
+            // mid大于左边边界或者小于左边边界，最小值都有可能落在这个区间，所以区分不了 一定要 nums[mid] <= nums[right]
             if (nums[mid] <= nums[right]) {
                 right = mid;
             } else {
                 left = mid + 1;
             }
         }
-        return nums[left] > nums[right] ? nums[right] : nums[left];
+        return nums[left];
     }
 
     public static void main(String[] args) {
